@@ -1,2 +1,13 @@
 html, body {
   width: 100%; }
+
+.container {
+  width: 25%;
+  background: #e6ecf2;
+  color: #009900; }
+
+.label {
+  font-weight: bold; }
+
+.row {
+  margin: 5px; }

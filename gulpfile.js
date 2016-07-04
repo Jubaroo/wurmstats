@@ -4,7 +4,7 @@ var gulp = require("gulp"),
     browserSync = require('browser-sync').create();
 
 gulp.task('default', ['sass', 'browserSync'], function () {
-    gulp.watch('src/scss/*.scss', ['sass']);
+    gulp.watch('scss/*.scss', ['sass']);
     gulp.watch('html/**', browserSync.reload);
 });
 

@@ -5,12 +5,49 @@
         <title>Wurm Stats</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=0.9, minimum-scale=0.9" />
         <link href="css/stats.css" rel="stylesheet" type="text/css">
+        <!-- http://purecss.io/ -->
+        <link href="https://cdn.jsdelivr.net/pure/0.6.0/pure-min.css" rel="stylesheet" type="text/css">
+        <!-- http://jquery.com/ -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <!-- http://knockoutjs.com/ -->
         <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js"></script>
+        <!-- http://momentjs.com/ -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+        <!-- https://github.com/jsmreese/moment-duration-format -->
+        <script src="js/moment-duration-format.js"></script>
         <script src="js/stats.js"></script>
 </head>
 <body>
-    Content goes here, duh.
+    <div class="container">
+        <div class="pure-g row" data-bind="visible: $root.serverName.length > 0">
+            <div class="pure-u-1-2 label">Server name</div>
+            <div class="pure-u-1-2 data" data-bind="text: $root.serverName"></div>
+        </div>
+        <div class="pure-g row">
+            <div class="pure-u-1-2 label">Last updated</div>
+            <div class="pure-u-1-2 data" data-bind="text: $root.lastUpdated"></div>
+        </div>
+        <div class="pure-g row">
+            <div class="pure-u-1-2 label">Status</div>
+            <div class="pure-u-1-2 data" data-bind="text: $root.status"></div>
+        </div>
+        <div class="pure-g row">
+            <div class="pure-u-1-2 label">Uptime</div>
+            <div class="pure-u-1-2 data" data-bind="text: $root.upSince"></div>
+        </div>
+        <div class="pure-g row">
+            <div class="pure-u-1-2 label">Wurm time</div>
+            <div class="pure-u-1-2 data" data-bind="text: $root.wurmtime"></div>
+        </div>
+        <div data-bind="foreach: { data: servers, as: 'server'}, visible: servers().length > 0">
+            <div class="pure-g row">
+                <div class="pure-u-1-2 label" data-bind="text: server.name"></div>
+                <div class="pure-u-1-2 data">
+                    <span data-bind="text: server.players"></span>/<span data-bind="text: server.maxplayers"></span>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>                   
