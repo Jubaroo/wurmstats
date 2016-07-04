@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Reads in a stats.xml file and parses into HTML",
   "main": "stats.html",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/xorith/wurmstats"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,7 +15,6 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-sass": "^2.3.2",
-    "jquery-mockjax": "^2.2.0",
     "connect-history-api-fallback": "^1.2.0",
     "browser-sync": "^2.12.3"
   }
