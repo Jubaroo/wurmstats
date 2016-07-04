@@ -1,13 +1,44 @@
-html, body {
+html{
     width: 100%;
 }
+body {
+    @extend html;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (min-width: 35.5em) {
+    .container {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media screen and (min-width: 48em) {
+    .container {
+        width: 50%;
+        margin: 0 auto;
+    }
+}
+
 .container {
-    width: 25%;
     background: #e6ecf2;
     color: #009900;
+    padding: 0;    
 }
-.label {
+
+div.label {
     font-weight: bold;
+    text-align: right;
+    span {
+        padding-right: 5px;
+    }
+}
+div.data {
+    span {
+        padding-left: 5px;
+    }
 }
 .row {
     margin: 5px;
