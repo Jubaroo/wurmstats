@@ -1,0 +1,11 @@
+{
+  "name": "wurmstats",
+  "version": "1.0.0",
+  "description": "Reads in a stats.xml file and parses into HTML",
+  "main": "stats.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jonathan Walker",
+  "license": "ISC"
+}
