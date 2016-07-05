@@ -42,7 +42,10 @@ body {
         span {
             padding-left: .5em;
         }
-    }    
+        span.count {
+            padding: 0;
+        }
+    }
 }
 
 div.error.container {
@@ -64,7 +67,7 @@ div.error.container {
     display: none;
 }
 .row {
-    margin: 5px;
+    margin: .5em;
 }
 
 /* Loading animation courtesy of: https://codepen.io/alanshortis/pen/eJLVXr */

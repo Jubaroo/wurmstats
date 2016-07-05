@@ -28,6 +28,8 @@ body {
       padding-right: .5em; }
   .container div.data span {
     padding-left: .5em; }
+  .container div.data span.count {
+    padding: 0; }
 
 div.error.container {
   text-align: center;
@@ -45,7 +47,7 @@ div.error.container {
   display: none; }
 
 .row {
-  margin: 5px; }
+  margin: .5em; }
 
 /* Loading animation courtesy of: https://codepen.io/alanshortis/pen/eJLVXr */
 @keyframes pulse {
