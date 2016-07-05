@@ -30,17 +30,17 @@ body {
 .container {
     background: $bg-color;
     color: $fg-color;
-    padding: 0;
+    padding: 1em .25em;
     div.label {
         font-weight: bold;
         text-align: right;
         span {
-            padding-right: 5px;
+            padding-right: .5em;
         }
     }
     div.data {
         span {
-            padding-left: 5px;
+            padding-left: .5em;
         }
     }    
 }
@@ -49,7 +49,6 @@ div.error.container {
     text-align: center;
     color: $err-fg-color;
     height: 50%;
-    padding: 2em;
     .error.top {
         display: block;
         font-weight: bold;

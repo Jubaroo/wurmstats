@@ -31,24 +31,24 @@ function StatsViewModel(stats, serverName, dateFormat, uptimeFormat) {
     // timestamp - the unix timestamp of the last stats.xml update (NOTE: must multiply by 1000 for milliseconds)
     self.timestamp = ko.observable(0);
     // lastUpdated - computed based on timestamp and formatted with the injected dateFormat
-    self.lastUpdated = ko.computed(function() {
-        if(self.timestamp() == 0)
+    self.lastUpdated = ko.computed(function () {
+        if (self.timestamp() == 0)
             return "N/A";
         return moment.unix(self.timestamp()).format(dateFormat);
     });
-    self.upSince = ko.computed(function() {
-        if(self.uptime() == 0)
+    self.upSince = ko.computed(function () {
+        if (self.uptime() == 0)
             return "N/A";
         return moment.duration(self.uptime(), "seconds").format(uptimeFormat);
     });
     // Handles the data coming back from the request.
-    self.handleResult = function(s) {
+    self.handleResult = function (s) {
         self.status(s.find("status")[0].textContent);
         self.timestamp(parseInt(s.find("timestamp")[0].textContent));
         self.uptime(parseInt(s.find("uptime")[0].textContent));
         self.wurmtime(s.find("wurmtime")[0].textContent);
         var servers = s.find("server");
-        for(var i = 0; i < servers.length; i++) {
+        for (var i = 0; i < servers.length; i++) {
             self.servers.push(
                 {
                     "name": servers[i].attributes["name"].value,
@@ -62,19 +62,19 @@ function StatsViewModel(stats, serverName, dateFormat, uptimeFormat) {
 }
 
 // Entry point
-$(document).ready(function() {
-    var jqxhr = $.get(statsUrl, function(data) {
+$(document).ready(function () {
+    var jqxhr = $.get(statsUrl, function (data) {
         ko.applyBindings(new StatsViewModel($(data), serverName, dateFormat, uptimeFormat));
         $("div.loading.container").hide();
         $("div.feed.container").show();
     })
-    .fail(function(xhr, textStatus) {
-        $("div.loading.container").hide();
-        $("div.error.container").show();
-        var httpcode = 
-        $(".error.top").html("The request to '" + statsUrl + "' failed.");
-        $(".error.bottom").html("Status: HTTP "+xhr.status+" " + xhr.statusText);
-        console.log(xhr);
-    });    
+        .fail(function (xhr, textStatus) {
+            $("div.loading.container").hide();
+            $("div.error.container").show();
+            var httpcode =
+                $(".error.top").html("The request to '" + statsUrl + "' failed.");
+            $(".error.bottom").html("Status: HTTP " + xhr.status + " " + xhr.statusText);
+            console.log(xhr);
+        });
 
 });
