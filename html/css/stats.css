@@ -1,5 +1,6 @@
 html, body {
-  width: 100%; }
+  width: 100%;
+  height: 100%; }
 
 body {
   border: 0;
@@ -7,12 +8,12 @@ body {
   padding: 0; }
 
 @media screen and (min-width: 35.5em) {
-  .container {
+  .container, .loading.container, .error.container {
     width: 100%;
     margin: 0; } }
 
 @media screen and (min-width: 48em) {
-  .container {
+  .container, .loading.container, .error.container {
     width: 50%;
     margin: 0 auto; } }
 
@@ -20,15 +21,63 @@ body {
   background: #e6ecf2;
   color: #009900;
   padding: 0; }
+  .container div.label {
+    font-weight: bold;
+    text-align: right; }
+    .container div.label span {
+      padding-right: 5px; }
+  .container div.data span {
+    padding-left: 5px; }
 
-div.label {
-  font-weight: bold;
-  text-align: right; }
-  div.label span {
-    padding-right: 5px; }
+div.error.container {
+  text-align: center;
+  color: red;
+  height: 50%;
+  padding: 2em; }
+  div.error.container .error.top {
+    display: block;
+    font-weight: bold;
+    font-size: 1.5em; }
+  div.error.container .error.bottom {
+    display: block;
+    font-size: 1em; }
 
-div.data span {
-  padding-left: 5px; }
+.hide {
+  display: none; }
 
 .row {
   margin: 5px; }
+
+/* Loading animation courtesy of: https://codepen.io/alanshortis/pen/eJLVXr */
+@keyframes pulse {
+  50% {
+    background: #009900; } }
+
+div.loading.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #e6ecf2;
+  height: 50%; }
+  div.loading.container div.loading {
+    position: relative;
+    width: 6px;
+    height: 24px;
+    background: rgba(0, 153, 0, 0.2);
+    animation: pulse 750ms infinite;
+    animation-delay: 250ms; }
+    div.loading.container div.loading:before, div.loading.container div.loading:after {
+      content: '';
+      position: absolute;
+      display: block;
+      height: 16px;
+      width: 6px;
+      background: rgba(0, 153, 0, 0.2);
+      top: 50%;
+      transform: translateY(-50%);
+      animation: pulse 750ms infinite; }
+    div.loading.container div.loading:before {
+      left: -12px; }
+    div.loading.container div.loading:after {
+      left: 12px;
+      animation-delay: 500ms; }

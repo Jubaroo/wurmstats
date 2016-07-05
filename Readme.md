@@ -112,6 +112,8 @@ If you make any changes to the stats.html, ensure that the `data-bind` attribute
 ## HTML
 This project uses `div` instead of the tables found in the original `stats.html`.
 
+The loading animation is courtesy of [this CodePen](https://codepen.io/alanshortis/pen/eJLVXr).
+
 ## CSS/SCSS
 This project supports the use of Sass/SCSS, though it is optional. The classes used in the HTML file are as follows:
 * .container - The main container, everything is contained in this.
@@ -121,8 +123,19 @@ This project supports the use of Sass/SCSS, though it is optional. The classes u
 
 PureCSS is also used for the grid formatting, but the entire package is included. The PureCSS classes used are as follows:
 * pure-g - This is the base grid container, each row is a container.
-* pure-u-1-2 - This indicates that the grid is broken into two units, and this is one of them. Each cell uses this.
+* pure-u-1-3 - Tells the cell to use 1/3 of the parent container's width
+* pure-u-2-3 - Tells the cell to use 2/3 of the parent container's width
+
+I've also included some simple @media queries to make it look better on mobile, if desired. Again this can all be overridden with a custom CSS.
+You can even do your own HTML, so long as you data-bind correctly so the data shows.
 
 Development
 -----------
 Simply issue an `npm install` for all the dependencies to be installed. There are no dependencies to use this project. This is a completely optional step.
+
+Installation
+------------
+Installation will vary greatly depending on your setup. In general though:
+1. Ensure that your `stats.xml` is either viewable to the Internet or that you're able to use `stats.php` as a wrapper for it.
+2. Copy or link the entire `html/` folder into your web root. Do not change the structure without changing the paths in the files.
+3. Use the Configuration settings above to set up the utility and test!

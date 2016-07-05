@@ -24,7 +24,11 @@
         <script src="js/stats.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="loading container">
+        <div class="loading">
+        </div>
+    </div>    
+    <div class="feed container hide">
         <div class="pure-g row" data-bind="visible: $root.serverName.length > 0">
             <div class="pure-u-1-3 label"><span class="label">Server name</span></div>
             <div class="pure-u-2-3 data"><span class="data" data-bind="text: $root.serverName"></span></div>
@@ -52,6 +56,13 @@
                     <span class="data"><span data-bind="text: server.players"></span>/<span data-bind="text: server.maxplayers"></span></span>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="error container pure-g hide">
+        <div class="pure-u-1 error top"></div>
+        <div class="pure-u-1 error bottom"></div>
+        <div class="pure-u-1 error notice">
+            <p>You may want to press F12 or enter Developer Tools for your browser and check the console for the exact reason for the failure.</p>
         </div>
     </div>
 </body>

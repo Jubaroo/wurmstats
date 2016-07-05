@@ -1,5 +1,10 @@
+$bg-color: #e6ecf2;
+$fg-color: #009900;
+$err-fg-color: red;
+
 html{
     width: 100%;
+    height: 100%;
 }
 body {
     @extend html;
@@ -9,37 +14,103 @@ body {
 }
 
 @media screen and (min-width: 35.5em) {
-    .container {
+    .container, .loading.container, .error.container {
         width: 100%;
         margin: 0;
     }
 }
 
 @media screen and (min-width: 48em) {
-    .container {
+    .container, .loading.container, .error.container {
         width: 50%;
         margin: 0 auto;
     }
 }
 
 .container {
-    background: #e6ecf2;
-    color: #009900;
-    padding: 0;    
+    background: $bg-color;
+    color: $fg-color;
+    padding: 0;
+    div.label {
+        font-weight: bold;
+        text-align: right;
+        span {
+            padding-right: 5px;
+        }
+    }
+    div.data {
+        span {
+            padding-left: 5px;
+        }
+    }    
 }
 
-div.label {
-    font-weight: bold;
-    text-align: right;
-    span {
-        padding-right: 5px;
+div.error.container {
+    text-align: center;
+    color: $err-fg-color;
+    height: 50%;
+    padding: 2em;
+    .error.top {
+        display: block;
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+    .error.bottom {
+        display: block;
+        font-size: 1em;
     }
 }
-div.data {
-    span {
-        padding-left: 5px;
-    }
+
+.hide {
+    display: none;
 }
 .row {
     margin: 5px;
+}
+
+/* Loading animation courtesy of: https://codepen.io/alanshortis/pen/eJLVXr */
+$base-line-height: 24px;
+$white: $fg-color;
+$off-white: rgba($white, 0.2);
+$spin-duration: 1s;
+$pulse-duration: 750ms;
+
+@keyframes pulse {	
+  50% { 
+    background: $white;
+  } 
+}
+
+div.loading.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: $bg-color;
+    height: 50%;
+    div.loading {
+        position: relative;
+        width: ($base-line-height / 4);
+        height: $base-line-height;
+        background: $off-white;
+        animation: pulse $pulse-duration infinite;
+        animation-delay: ($pulse-duration / 3);
+        &:before, &:after {
+            content: '';
+            position: absolute;
+            display: block;
+            height: ($base-line-height / 1.5);
+            width: ($base-line-height / 4);
+            background: $off-white;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: pulse $pulse-duration infinite;
+        }
+        &:before {
+            left: -($base-line-height / 2);
+        }
+        &:after {
+            left: ($base-line-height / 2);
+            animation-delay: ($pulse-duration / 1.5);
+        }
+    }    
 }

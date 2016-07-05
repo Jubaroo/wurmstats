@@ -63,7 +63,18 @@ function StatsViewModel(stats, serverName, dateFormat, uptimeFormat) {
 
 // Entry point
 $(document).ready(function() {
-    $.get(statsUrl, function(data) {
+    var jqxhr = $.get(statsUrl, function(data) {
         ko.applyBindings(new StatsViewModel($(data), serverName, dateFormat, uptimeFormat));
-    });
+        $("div.loading.container").hide();
+        $("div.feed.container").show();
+    })
+    .fail(function(xhr, textStatus) {
+        $("div.loading.container").hide();
+        $("div.error.container").show();
+        var httpcode = 
+        $(".error.top").html("The request to '" + statsUrl + "' failed.");
+        $(".error.bottom").html("Status: HTTP "+xhr.status+" " + xhr.statusText);
+        console.log(xhr);
+    });    
+
 });
