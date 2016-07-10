@@ -1,4 +1,3 @@
-
 define(["jquery", "knockout", "jstz", "moment", "moment.tz", "moment.duration.format"],
     function ($, ko, jstz, moment) {
         // Configure statsUrl to point to your stats.xml or the included stats.php wrapper.
@@ -116,3 +115,4 @@ define(["jquery", "knockout", "jstz", "moment", "moment.tz", "moment.duration.fo
 
         });
     });
+    
