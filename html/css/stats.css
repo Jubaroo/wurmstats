@@ -1,3 +1,6 @@
+/* External CSS Dependencies for PureCSS http://purecss.io */
+@import url("//cdn.jsdelivr.net/pure/0.6.0/pure-min.css");
+@import url("//cdn.jsdelivr.net/pure/0.6.0/grids-responsive-min.css");
 html, body {
   width: 100%;
   height: 100%; }
