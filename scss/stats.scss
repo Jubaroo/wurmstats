@@ -5,6 +5,7 @@
 $bg-color: #e6ecf2;
 $fg-color: #009900;
 $err-fg-color: red;
+$offline-fg-color: $err-fg-color;
 
 html{
     width: 100%;
@@ -44,10 +45,15 @@ body {
     }
     div.data {
         span {
-            padding-left: .5em;
+            display: inline-block;
+            margin-left: .5em;
         }
         span.count {
-            padding: 0;
+            margin-left: 0;
+        }
+        span.offline {
+            color: $offline-fg-color;
+            margin-left: 0;
         }
     }
 }

@@ -16,7 +16,20 @@ This utility uses the following Javascript libraries:
 
 It also uses [PureCSS](http://purecss.io/) as a CSS framework, but this is not a requirement for functionality.
 
-All libraries except Moment-duration-format are linked via CDNs, with the aforementioned being included in the `html/js` folder.
+All libraries are included via CDNs:
+
+*Javascript*
+* JQuery: `//ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min`
+* RequireJS: `//cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.js`
+* Knockout.js: `//ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0`
+* Moment.js: `//cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min`
+* Moment-timezone: `//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.4/moment-timezone-with-data.min`
+* Moment-duration-format: `//cdnjs.cloudflare.com/ajax/libs/moment-duration-format/1.3.0/moment-duration-format`
+* JsTimezoneDetect: `//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.6/jstz.min`
+
+*CSS*
+* PureCSS: `//cdn.jsdelivr.net/pure/0.6.0/pure-min.css`
+* PureCSS Grids: `//cdn.jsdelivr.net/pure/0.6.0/grids-responsive-min.css`
 
 Structure
 ---------
@@ -69,6 +82,14 @@ Otherwise point statsUrl to your stats.xml and ensure that it is on the same dom
 Example:
 ```
 var statsUrl = "http://brain.death.rocks/~jonathan/stats.php";
+```
+
+### autoRefresh
+This is the interval at which the script should refresh the data, in seconds. A setting of `0` disables auto-refreshing.
+Example:
+```
+var autoRefresh = 10; // 10 second refresh
+var autoRefresh = 0;  // Auto-refreshing disabled
 ```
 
 ### serverName
@@ -127,6 +148,7 @@ Since this uses Knockout.js, all of the data is available through data binds.
 * $root.servers - A list of servers sent in the feed
     * name - The name of the server
     * maxplayers - The max players set in the server configuration
+    * online - True if the server is online, false if it is offline. (This is determined by maxplayers, a value of `0` indicates a server is offline.)
     * players - Current player count
 * $root.lastUpdated - This is a a formatted version of `$root.timestamp`
 * $root.upSince - A formatted version of `$root.uptime`
@@ -144,6 +166,7 @@ This project supports the use of Sass/SCSS, though it is optional. The classes u
 * .row - Defines a data row
 * .label - Defines a label cell, such as the name of a server
 * .data - Defines a data cell, such as the population totals
+* .offline - Used only when displaying data for an offline server in the server list.
 
 PureCSS is also used for the grid formatting, but the entire package is included. The PureCSS classes used are as follows:
 * pure-g - This is the base grid container, each row is a container.

@@ -41,8 +41,11 @@
         <div data-bind="foreach: { data: servers, as: 'server'}, visible: servers().length > 0">
             <div class="pure-g row">
                 <div class="pure-u-1-3 label"><span class="data" data-bind="text: server.name"></span></div>
-                <div class="pure-u-2-3 data">
+                <div class="pure-u-2-3 data" data-bind="visible: server.online">
                     <span class="data"><span class="count" data-bind="text: server.players"></span>/<span class="count" data-bind="text: server.maxplayers"></span></span>
+                </div>
+                <div class="pure-u-2-3 data" data-bind="visible: !server.online">
+                    <span class="data"><span class="offline">Offline</span>
                 </div>
             </div>
         </div>

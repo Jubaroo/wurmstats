@@ -5,12 +5,15 @@ define(["jquery", "knockout", "jstz", "moment", "moment.tz", "moment.duration.fo
         //       If your stats.xml is NOT on the same domain as your website, use the stats.php wrapper.
         var statsUrl = "http://brain.death.rocks/~jonathan/stats.php";
 
+        // Interval to refresh stats in seconds. 0 = never refresh
+        var autoRefresh = 5;
+
         // Configure what servername to show at the top of the stats listing - OPTIONAL
-        var serverName = "";
+        var serverName = "Golden Valley";
 
         // Date format
         // For more information on formats: http://momentjs.com/docs/#/displaying/format/
-        var dateFormat = "dddd, MMMM D, YYYY";
+        var dateFormat = "dddd, MMMM D, YYYY h:mm:ss A";
         // Timezone
         var timezone = "Europe/Stockholm";
         // Display User's Timezone (if available)
@@ -24,7 +27,7 @@ define(["jquery", "knockout", "jstz", "moment", "moment.tz", "moment.duration.fo
         // ViewModel - all of the data bindings are found here.
         // You can bind any of these using the data-bind attribute.
         // To change default values, edit the string inside the ko.observable() - DO NOT remove ko.observable!
-        function StatsViewModel(stats) {
+        function StatsViewModel() {
             var self = this;
             // serverName is injected
             self.serverName = serverName;
@@ -85,34 +88,41 @@ define(["jquery", "knockout", "jstz", "moment", "moment.tz", "moment.duration.fo
                 self.wurmtime(self.readValue(s, "wurmtime"));
                 self.weather(self.readValue(s, "weather"));
                 var servers = s.find("server");
+                self.servers([]);
                 for (var i = 0; i < servers.length; i++) {
+                    var maxPlayers = parseInt(servers[i].attributes["maxplayers"].value),
+                        online = maxPlayers != 0;
                     self.servers.push(
                         {
                             "name": servers[i].attributes["name"].value,
-                            "maxplayers": parseInt(servers[i].attributes["maxplayers"].value),
+                            "maxplayers": maxPlayers,
+                            "online": online,
                             "players": parseInt(servers[i].attributes["players"].value)
                         }
                     );
                 }
             };
-            self.handleResult(stats);
+            self.fetchStats = function() {
+                var jqxhr = $.get(statsUrl, function (data) {
+                    self.handleResult($(data));
+                    $("div.loading.container").hide();
+                    $("div.feed.container").show();
+                }).fail(function (xhr, textStatus) {
+                    $("div.loading.container").hide();
+                    $("div.error.container").show();
+                    $(".error.top").html("The request to '" + statsUrl + "' failed.");
+                    $(".error.bottom").html("Status: HTTP " + xhr.status + " " + xhr.statusText);
+                    console.log(xhr);                    
+                });
+
+            };
+            self.fetchStats();
+            if(autoRefresh > 0)
+                setInterval(self.fetchStats, autoRefresh * 1000);
         }
         // Entry point
         $(document).ready(function () {
-            var jqxhr = $.get(statsUrl, function (data) {
-                ko.applyBindings(new StatsViewModel($(data)));
-                $("div.loading.container").hide();
-                $("div.feed.container").show();
-            })
-                .fail(function (xhr, textStatus) {
-                    $("div.loading.container").hide();
-                    $("div.error.container").show();
-                    var httpcode =
-                        $(".error.top").html("The request to '" + statsUrl + "' failed.");
-                    $(".error.bottom").html("Status: HTTP " + xhr.status + " " + xhr.statusText);
-                    console.log(xhr);
-                });
-
+	        ko.applyBindings(new StatsViewModel());
         });
     });
     

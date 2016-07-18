@@ -30,9 +30,13 @@ body {
     .container div.label span {
       padding-right: .5em; }
   .container div.data span {
-    padding-left: .5em; }
+    display: inline-block;
+    margin-left: .5em; }
   .container div.data span.count {
-    padding: 0; }
+    margin-left: 0; }
+  .container div.data span.offline {
+    color: red;
+    margin-left: 0; }
 
 div.error.container {
   text-align: center;
